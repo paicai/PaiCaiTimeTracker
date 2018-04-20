@@ -1,0 +1,25 @@
+Database specification
+
+Table: USERS
+Columns:
+  - USER_ID (primary key)
+  - USERNAME
+  - PASSWORD
+  - FIRST_NAME
+  - LAST_NAME
+  - USER_ID_CONFIRMS
+  - TIMESTAMP_CREATED
+  - USER_ID_CREATED
+  - TIMESTAMP_MODIFIED
+  - USER_ID_MODIFIED
+  
+Table: TIMESTAMPS
+Columns:
+  - TIMESTAMP_ID (primary key)
+  - USER_ID
+  - ARRIVE
+  - DEPART
+  - ABSENT
+  - DURATION_WORK
+  - TIMESTAMP_MODIFIED
+  - USER_ID_MODIFIED
