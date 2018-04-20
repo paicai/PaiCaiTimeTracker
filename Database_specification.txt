@@ -2,24 +2,24 @@ Database specification
 
 Table: USERS
 Columns:
-  - USER_ID (primary key)
-  - USERNAME
-  - PASSWORD
-  - FIRST_NAME
-  - LAST_NAME
-  - USER_ID_CONFIRMS
-  - TIMESTAMP_CREATED
+  - USER_ID (primary key, autoindex)
+  - USERNAME (varchar)
+  - PASSWORD (varchar)
+  - FIRST_NAME (varchar)
+  - LAST_NAME (varchar)
+  - USER_ID_CONFIRMS (int)
+  - TIMESTAMP_CREATED 
   - USER_ID_CREATED
-  - TIMESTAMP_MODIFIED
-  - USER_ID_MODIFIED
+  - TIMESTAMP_MODIFIED (timestamp)
+  - USER_ID_MODIFIED (timestamp)
   
 Table: TIMESTAMPS
 Columns:
-  - TIMESTAMP_ID (primary key)
-  - USER_ID
-  - ARRIVE
-  - DEPART
-  - ABSENT
-  - DURATION_WORK
-  - TIMESTAMP_MODIFIED
-  - USER_ID_MODIFIED
+  - TIMESTAMP_ID (primary key, autoindex)
+  - USER_ID (foregin Key)
+  - ARRIVE (timestamp)
+  - DEPART (varchar)
+  - ABSENT (int)
+  - DURATION_WORK (timestsamp)
+  - TIMESTAMP_MODIFIED (timestsamp)
+  - USER_ID_MODIFIED (timestsamp)
