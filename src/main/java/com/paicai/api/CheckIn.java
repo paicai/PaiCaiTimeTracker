@@ -43,27 +43,31 @@ public class CheckIn {
     /**
      * User created
      */
-    @Column(name ="USER_CREATED")
-    private String userCreated;
-
-    /**
-     * Time created
-     */
-    @Column(name ="TIME_CREATED")
-    private DateTime timeCreated;
-
-
-    /**
-     * User modified
-     */
-    @Column(name ="USER_MODIFIED")
-    private String userModified;
-
-    /**
-     * Time modified
-     */
-    @Column(name ="TIME_MODIFIED")
-    private DateTime timeModified;
+//    @GeneratedValue
+//    @Column(name ="USER_CREATED")
+//    private String userCreated;
+//
+//    /**
+//     * Time created
+//     */
+//    @GeneratedValue
+//    @Column(name ="TIME_CREATED")
+//    private DateTime timeCreated;
+//
+//
+//    /**
+//     * User modified
+//     */
+//    @GeneratedValue
+//    @Column(name ="USER_MODIFIED")
+//    private String userModified;
+//
+//    /**
+//     * Time modified
+//     */
+//    @GeneratedValue
+//    @Column(name ="TIME_MODIFIED")
+//    private DateTime timeModified;
 
     public CheckIn() {}
 
@@ -105,33 +109,33 @@ public class CheckIn {
         this.userId = userId;
     }
 
-    public String getUserCreated() {
-        return userCreated;
-    }
-
-    public void setUserCreated(String userCreated) {
-        this.userCreated = userCreated;
-    }
-
-    public DateTime getTimeCreated() {
-        return timeCreated;
-    }
-
-    public void setTimeCreated(DateTime timeCreated) {
-        this.timeCreated = timeCreated;
-    }
-
-    public String getUserModified() { return userModified; }
-
-    public void setUserModified(String userModified) {
-        this.userModified = userModified;
-    }
-
-    public DateTime getTimeModified() {
-        return timeModified;
-    }
-
-    public void setTimeModified(DateTime timeModified) {
-        this.timeModified = timeModified;
-    }
+//    public String getUserCreated() {
+//        return userCreated;
+//    }
+//
+//    public void setUserCreated(String userCreated) {
+//        this.userCreated = userCreated;
+//    }
+//
+//    public DateTime getTimeCreated() {
+//        return timeCreated;
+//    }
+//
+//    public void setTimeCreated(DateTime timeCreated) {
+//        this.timeCreated = timeCreated;
+//    }
+//
+//    public String getUserModified() { return userModified; }
+//
+//    public void setUserModified(String userModified) {
+//        this.userModified = userModified;
+//    }
+//
+//    public DateTime getTimeModified() {
+//        return timeModified;
+//    }
+//
+//    public void setTimeModified(DateTime timeModified) {
+//        this.timeModified = timeModified;
+//    }
 }
