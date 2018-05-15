@@ -1,4 +1,4 @@
-package com.paicai.api;
+package com.paicai.core;
 
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
@@ -40,9 +40,9 @@ public class CheckIn {
     @Column(name ="USER_ID")
     private Integer userId;
 
-    /**
-     * User created
-     */
+//    /**
+//     * User created
+//     */
 //    @GeneratedValue
 //    @Column(name ="USER_CREATED")
 //    private String userCreated;

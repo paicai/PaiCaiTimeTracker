@@ -1,4 +1,4 @@
-package com.paicai.api;
+package com.paicai.core;
 
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;

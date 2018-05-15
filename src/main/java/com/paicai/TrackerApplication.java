@@ -1,7 +1,7 @@
 package com.paicai;
 
-import com.paicai.api.CheckIn;
-import com.paicai.api.CheckInDAO;
+import com.paicai.core.CheckIn;
+import com.paicai.core.CheckInDAO;
 import com.paicai.resources.TrackerResource;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;

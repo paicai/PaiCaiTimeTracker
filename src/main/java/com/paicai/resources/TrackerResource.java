@@ -1,7 +1,7 @@
 package com.paicai.resources;
 
-import com.paicai.api.CheckIn;
-import com.paicai.api.CheckInDAO;
+import com.paicai.core.CheckIn;
+import com.paicai.core.CheckInDAO;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.*;
