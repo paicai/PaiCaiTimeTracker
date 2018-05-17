@@ -2,6 +2,9 @@ package com.paicai.resources;
 
 import com.paicai.core.CheckIn;
 import com.paicai.core.CheckInDAO;
+import com.paicai.core.User;
+import com.paicai.core.UserDAO;
+import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.*;
@@ -16,21 +19,37 @@ import java.util.List;
 public class TrackerResource {
 
     private CheckInDAO checkInDAO;
+    private UserDAO userDAO;
 
-    public TrackerResource(CheckInDAO checkInDAO) {
+    public TrackerResource(CheckInDAO checkInDAO, UserDAO userDAO) {
+
         this.checkInDAO = checkInDAO;
+        this.userDAO = userDAO;
     }
 
-    @GET
-    @UnitOfWork
-    public List<CheckIn> findAll() {
-        return checkInDAO.findAll();
-    }
+//    @GET
+//    @UnitOfWork
+//    public List<CheckIn> findAll() {
+//        return checkInDAO.findAll();
+//    }
 
     @POST
     @UnitOfWork
     public Response newCheckIn(String type) {
         return Response.created(UriBuilder.fromResource(TrackerResource.class).build()).entity(checkInDAO.newCheckIn(type)).build();
+    }
+
+    @GET
+    @UnitOfWork
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CheckIn> findByUsername(@Auth User user) {
+
+        if(null != user) {
+            System.out.println(user.toString());
+            return checkInDAO.findByUser(user.getUsername());
+        }
+        System.out.println("user == null");
+        return checkInDAO.findAll();
     }
 
 }

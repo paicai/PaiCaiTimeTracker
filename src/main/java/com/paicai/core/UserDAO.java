@@ -3,6 +3,8 @@ package com.paicai.core;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
+import java.util.List;
+
 public class UserDAO extends AbstractDAO<User> {
 
     public UserDAO(SessionFactory sessionFactory) {
@@ -10,7 +12,12 @@ public class UserDAO extends AbstractDAO<User> {
     }
 
     public User getUser(String username) {
+        List<User> userList = list(namedQuery("findUser").setParameter("username", username));
 
-        return currentSession().get(User.class, username);
+        if(userList.size() == 1) {
+            return userList.get(0);
+        }
+        return null;
     }
+
 }

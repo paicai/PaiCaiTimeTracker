@@ -16,6 +16,10 @@ public class CheckInDAO extends AbstractDAO<CheckIn> {
         return list(namedQuery("findAll"));
     }
 
+    public List<CheckIn> findByUser(String username) {
+        return list(namedQuery("findByUser").setParameter("username", username));
+    }
+
     public CheckIn newCheckIn(String type) {
         CheckIn checkIn = new CheckIn(DateTime.now(), type, Integer.valueOf(1));
         currentSession().save(checkIn);

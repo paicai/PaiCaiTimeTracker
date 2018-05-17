@@ -10,7 +10,9 @@ import javax.persistence.*;
 @Table(name = "check_in")
 @NamedQueries({
         @NamedQuery(name = "findAll",
-        query = "select c from CheckIn c")
+                query = "select c from CheckIn c"),
+        @NamedQuery(name = "findByUser",
+                query = "select c from CheckIn c where username = :username")
 })
 public class CheckIn {
 

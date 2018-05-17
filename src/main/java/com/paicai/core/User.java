@@ -11,10 +11,11 @@ import java.security.Principal;
 @Entity
 @Table(name = "users")
 @NamedQueries({
-        @NamedQuery(name = "findAll",
-                query = "select u from User u")
+        @NamedQuery(name = "findUser",
+                query = "select u from User u where username = :username")
 })
 public class User implements Principal {
+
 
     /**
      * Primary key
@@ -51,8 +52,14 @@ public class User implements Principal {
     /**
      * User who confirms vacations or absence
      */
-    @Column(name = "USER_ID_CONFIRM")
-    private long userIdConfirm;
+//    @Column(name = "USER_ID_CONFIRM")
+//    private long userIdConfirm;
+
+    public User() {};
+
+    public User(String username) {
+        this.username = username;
+    }
 
     public long getId() {
         return id;
@@ -94,13 +101,13 @@ public class User implements Principal {
         this.lastName = lastName;
     }
 
-    public long getUserIdConfirm() {
-        return userIdConfirm;
-    }
-
-    public void setUserIdConfirm(long userIdConfirm) {
-        this.userIdConfirm = userIdConfirm;
-    }
+//    public long getUserIdConfirm() {
+//        return userIdConfirm;
+//    }
+//
+//    public void setUserIdConfirm(long userIdConfirm) {
+//        this.userIdConfirm = userIdConfirm;
+//    }
 
     public String getName() {
         return this.username;
