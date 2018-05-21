@@ -12,7 +12,9 @@ import java.security.Principal;
 @Table(name = "users")
 @NamedQueries({
         @NamedQuery(name = "findUser",
-                query = "select u from User u where username = :username")
+                query = "select u from User u where username = :username"),
+        @NamedQuery(name = "findAllUsers",
+                query = "select u from User u")
 })
 public class User implements Principal {
 
@@ -59,6 +61,13 @@ public class User implements Principal {
 
     public User(String username) {
         this.username = username;
+    }
+
+    public User(String username, String password, String firstName, String lastName) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public long getId() {

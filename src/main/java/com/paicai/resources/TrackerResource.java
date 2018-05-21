@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.util.List;
 
-@Path("/track")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class TrackerResource {
@@ -34,12 +34,14 @@ public class TrackerResource {
 //    }
 
     @POST
+    @Path("/track")
     @UnitOfWork
     public Response newCheckIn(@Auth User user, String type) {
         return Response.created(UriBuilder.fromResource(TrackerResource.class).build()).entity(checkInDAO.newCheckIn(userDAO.getUser(user.getUsername()).getId(), type)).build();
     }
 
     @GET
+    @Path("/track")
     @UnitOfWork
     @Produces(MediaType.APPLICATION_JSON)
     public List<CheckIn> findByUsername(@Auth User user) {
@@ -52,4 +54,21 @@ public class TrackerResource {
         return checkInDAO.findAll();
     }
 
+    @POST
+    @UnitOfWork
+    @Path("/register")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response newUser(String username) {
+
+        User user = new User(username);
+        return Response.created(UriBuilder.fromResource(TrackerResource.class).build()).entity(userDAO.newUser(user)).build();
+    }
+
+    @GET
+    @UnitOfWork
+    @Path("/register")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<User> findUsers() {
+        return userDAO.findAll();
+    }
 }

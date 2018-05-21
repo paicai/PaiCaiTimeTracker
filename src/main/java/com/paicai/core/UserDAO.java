@@ -20,4 +20,17 @@ public class UserDAO extends AbstractDAO<User> {
         return null;
     }
 
+    public List<User> findAll() {
+        List<User> userList = list(namedQuery("findAllUsers"));
+        return userList;
+    }
+
+    public User newUser(User user) {
+//        User user = new User(username, password, firstName, lastName);
+        System.out.println(user.getUsername());
+//        currentSession().save(user);
+//        currentSession().getTransaction().commit();
+        return user;
+    }
+
 }
