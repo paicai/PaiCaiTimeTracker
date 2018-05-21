@@ -35,7 +35,7 @@ public class TrackerAuthenticator implements Authenticator<BasicCredentials, Use
             User user = userDAO.getUser(basicCredentials.getUsername());
 
             if(null != user && basicCredentials.getPassword().equals(user.getPassword())) {
-                return Optional.of(new User(basicCredentials.getUsername()));
+                return Optional.of(user);
             }
             return Optional.empty();
 

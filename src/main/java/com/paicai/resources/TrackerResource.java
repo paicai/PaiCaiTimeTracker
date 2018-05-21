@@ -35,8 +35,8 @@ public class TrackerResource {
 
     @POST
     @UnitOfWork
-    public Response newCheckIn(String type) {
-        return Response.created(UriBuilder.fromResource(TrackerResource.class).build()).entity(checkInDAO.newCheckIn(type)).build();
+    public Response newCheckIn(@Auth User user, String type) {
+        return Response.created(UriBuilder.fromResource(TrackerResource.class).build()).entity(checkInDAO.newCheckIn(userDAO.getUser(user.getUsername()).getId(), type)).build();
     }
 
     @GET
@@ -45,8 +45,8 @@ public class TrackerResource {
     public List<CheckIn> findByUsername(@Auth User user) {
 
         if(null != user) {
-            System.out.println(user.toString());
-            return checkInDAO.findByUser(user.getUsername());
+            System.out.println(user.getUsername());
+            return checkInDAO.findByUser(userDAO.getUser(user.getUsername()).getId());
         }
         System.out.println("user == null");
         return checkInDAO.findAll();

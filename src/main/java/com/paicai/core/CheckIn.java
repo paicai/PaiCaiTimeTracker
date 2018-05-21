@@ -12,7 +12,7 @@ import javax.persistence.*;
         @NamedQuery(name = "findAll",
                 query = "select c from CheckIn c"),
         @NamedQuery(name = "findByUser",
-                query = "select c from CheckIn c where username = :username")
+                query = "select c from CheckIn c where user_id = :user_id")
 })
 public class CheckIn {
 
@@ -40,7 +40,7 @@ public class CheckIn {
      * User ID
      */
     @Column(name ="USER_ID")
-    private Integer userId;
+    private long userId;
 
 //    /**
 //     * User created
@@ -73,7 +73,7 @@ public class CheckIn {
 
     public CheckIn() {}
 
-    public CheckIn(DateTime time, String type, Integer userId) {
+    public CheckIn(DateTime time, String type, long userId) {
         this.time = time;
         this.type = type;
         this.userId = userId;
@@ -103,11 +103,11 @@ public class CheckIn {
         this.type = type;
     }
 
-    public Integer getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

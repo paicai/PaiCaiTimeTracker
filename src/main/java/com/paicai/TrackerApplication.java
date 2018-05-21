@@ -8,6 +8,7 @@ import com.paicai.core.UserDAO;
 import com.paicai.resources.TrackerResource;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
@@ -54,6 +55,7 @@ public class TrackerApplication extends Application<TrackerConfiguration> {
                                                 hibernateBundle.getSessionFactory()}))
                         .setRealm("SUPER SECRET STUFF")
                         .buildAuthFilter()));
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
         environment.jersey().register(new TrackerResource(checkInDAO, userDAO));
     }
 
