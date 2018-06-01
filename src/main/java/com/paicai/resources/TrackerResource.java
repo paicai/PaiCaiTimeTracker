@@ -1,5 +1,6 @@
 package com.paicai.resources;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paicai.core.CheckIn;
 import com.paicai.core.CheckInDAO;
 import com.paicai.core.User;
@@ -11,11 +12,11 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
+import java.io.IOException;
 import java.util.List;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class TrackerResource {
 
     private CheckInDAO checkInDAO;
@@ -33,6 +34,10 @@ public class TrackerResource {
 //        return checkInDAO.findAll();
 //    }
 
+
+    /*
+    Whenever a person arrives or leaves a new checkIn is created, saving the userId, DateTime and CheckIn type
+     */
     @POST
     @Path("/track")
     @UnitOfWork
@@ -40,6 +45,9 @@ public class TrackerResource {
         return Response.created(UriBuilder.fromResource(TrackerResource.class).build()).entity(checkInDAO.newCheckIn(userDAO.getUser(user.getUsername()).getId(), type)).build();
     }
 
+    /*
+    Display all checkIns of a single user
+     */
     @GET
     @Path("/track")
     @UnitOfWork
@@ -54,21 +62,26 @@ public class TrackerResource {
         return checkInDAO.findAll();
     }
 
+    /*
+    Register new user, pass JSON in POST method's body
+    Ex. {"username": "testen", "password": "pass", "firstName": "Matej", "lastName": "Testen"}
+     */
     @POST
     @UnitOfWork
     @Path("/register")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response newUser(String username) {
+    public Response newUser(String user_data) throws IOException {
 
-        User user = new User(username);
+        //System.out.println("Data: " + user_data);
+        ObjectMapper mapper = new ObjectMapper();
+        User user = mapper.readValue(user_data, User.class);
         return Response.created(UriBuilder.fromResource(TrackerResource.class).build()).entity(userDAO.newUser(user)).build();
     }
 
-    @GET
-    @UnitOfWork
-    @Path("/register")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<User> findUsers() {
-        return userDAO.findAll();
-    }
+//    @GET
+//    @UnitOfWork
+//    @Path("/register")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List<User> findUsers() {
+//        return userDAO.findAll();
+//    }
 }

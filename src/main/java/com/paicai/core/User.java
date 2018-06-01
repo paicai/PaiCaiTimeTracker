@@ -1,6 +1,7 @@
 package com.paicai.core;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.joda.time.DateTime;
@@ -31,24 +32,28 @@ public class User implements Principal {
      * Username
      */
     @Column(name ="USERNAME")
+    @JsonProperty("username")
     private String username;
 
     /**
      * Password
      */
     @Column(name ="PASSWORD")
+    @JsonProperty("password")
     private String password;
 
     /**
      * First Name
      */
     @Column(name ="FIRST_NAME")
+    @JsonProperty("firstName")
     private String firstName;
 
     /**
      * Last Name
      */
     @Column(name ="LAST_NAME")
+    @JsonProperty("lastName")
     private String lastName;
 
     /**

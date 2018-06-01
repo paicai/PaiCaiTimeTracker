@@ -27,9 +27,9 @@ public class UserDAO extends AbstractDAO<User> {
 
     public User newUser(User user) {
 //        User user = new User(username, password, firstName, lastName);
-        System.out.println(user.getUsername());
-//        currentSession().save(user);
-//        currentSession().getTransaction().commit();
+//        System.out.println(user.getUsername());
+        currentSession().save(user);
+        currentSession().getTransaction().commit();
         return user;
     }
 
