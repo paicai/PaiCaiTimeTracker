@@ -7,12 +7,13 @@ import com.paicai.core.User;
 import com.paicai.core.UserDAO;
 import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
-
+import org.joda.time.DateTime;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/")
@@ -46,7 +47,7 @@ public class TrackerResource {
     }
 
     /*
-    Display all checkIns of a single user
+    Display daily checkIns of a single user
      */
     @GET
     @Path("/track")
@@ -56,10 +57,27 @@ public class TrackerResource {
 
         if(null != user) {
             System.out.println(user.getUsername());
-            return checkInDAO.findByUser(userDAO.getUser(user.getUsername()).getId());
+            return checkInDAO.findByUserAndDate(userDAO.getUser(user.getUsername()).getId(), DateTime.now());
         }
         System.out.println("user == null");
-        return checkInDAO.findAll();
+        return new ArrayList<>();
+    }
+
+    /*
+    Display weekly checkIns of a single user
+     */
+    @GET
+    @Path("/weekly")
+    @UnitOfWork
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CheckIn> findWeeklyByUsername(@Auth User user) {
+
+        if(null != user) {
+            System.out.println(user.getUsername());
+            return checkInDAO.findByUserAndWeek(userDAO.getUser(user.getUsername()).getId(), DateTime.now());
+        }
+        System.out.println("user == null");
+        return new ArrayList<>();
     }
 
     /*
