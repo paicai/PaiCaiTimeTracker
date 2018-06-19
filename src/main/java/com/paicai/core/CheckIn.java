@@ -14,9 +14,9 @@ import javax.persistence.*;
         @NamedQuery(name = "findByUser",
                 query = "select c from CheckIn c where user_id = :user_id"),
         @NamedQuery(name = "findByUserAndDate",
-                query = "select c from CheckIn c where user_id = :user_id and DATE(check_in_time) = :date"),
+                query = "select c from CheckIn c where user_id = :user_id and DATE(check_in_time) = :date order by check_in_time"),
         @NamedQuery(name = "findByUserAndWeek",
-                query = "select c from CheckIn c where user_id = :user_id and DATE(check_in_time) between :dateMonday AND :dateSunday")
+                query = "select c from CheckIn c where user_id = :user_id and DATE(check_in_time) between :dateMonday AND :dateSunday order by check_in_time")
 })
 public class CheckIn {
 
