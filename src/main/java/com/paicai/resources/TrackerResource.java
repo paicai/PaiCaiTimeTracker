@@ -38,6 +38,7 @@ public class TrackerResource {
 
     /*
     Whenever a person arrives or leaves a new checkIn is created, saving the userId, DateTime and CheckIn type
+    Body of the request should contain the Type of Checkin ('A' for arrived, 'L' for left)
      */
     @POST
     @Path("/track")
