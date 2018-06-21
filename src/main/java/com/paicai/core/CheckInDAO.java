@@ -4,6 +4,7 @@ import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
+import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import java.sql.Date;
 
@@ -39,10 +40,22 @@ public class CheckInDAO extends AbstractDAO<CheckIn> {
 //    }
 
     public CheckIn newCheckIn(long user_id, String type) {
-        CheckIn checkIn = new CheckIn(DateTime.now(), type, user_id);
+        CheckIn checkIn = new CheckIn(roundDate(DateTime.now(), 5), type, user_id);
         currentSession().save(checkIn);
         currentSession().getTransaction().commit();
 
         return checkIn;
+    }
+
+    private DateTime roundDate(final DateTime dateTime, final int minutes) {
+        if (minutes < 1 || 60 % minutes != 0) {
+            throw new IllegalArgumentException("minutes must be a factor of 60");
+        }
+
+        final DateTime hour = dateTime.hourOfDay().roundFloorCopy();
+        final long millisSinceHour = new Duration(hour, dateTime).getMillis();
+        final int roundedMinutes = ((int)Math.round(
+                millisSinceHour / 60000.0 / minutes)) * minutes;
+        return hour.plusMinutes(roundedMinutes);
     }
 }
