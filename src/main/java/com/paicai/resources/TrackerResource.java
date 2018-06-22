@@ -101,7 +101,7 @@ public class TrackerResource {
     */
     @POST
     @UnitOfWork
-    @Path("/changePassword")
+    @Path("/changepassword")
     public Response changePassword(@Auth User user, String newPassword) {
         return Response.created(UriBuilder.fromResource(TrackerResource.class).build()).entity(userDAO.changePassword(user, newPassword)).build();
     }
