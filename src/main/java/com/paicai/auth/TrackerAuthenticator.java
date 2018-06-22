@@ -9,6 +9,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.context.internal.ManagedSessionContext;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ public class TrackerAuthenticator implements Authenticator<BasicCredentials, Use
             ManagedSessionContext.bind(session);
             User user = userDAO.getUser(basicCredentials.getUsername());
 
-            if(null != user && basicCredentials.getPassword().equals(user.getPassword())) {
+            if(null != user && BCrypt.checkpw(basicCredentials.getPassword(), user.getPassword())) {
                 return Optional.of(user);
             }
             return Optional.empty();

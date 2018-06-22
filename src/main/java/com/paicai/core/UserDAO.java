@@ -2,6 +2,7 @@ package com.paicai.core;
 
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
 
@@ -28,6 +29,15 @@ public class UserDAO extends AbstractDAO<User> {
     public User newUser(User user) {
 //        User user = new User(username, password, firstName, lastName);
 //        System.out.println(user.getUsername());
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        currentSession().save(user);
+        currentSession().getTransaction().commit();
+        return user;
+    }
+
+    public User changePassword(User user, String newPasswor) {
+        user = getUser(user.getUsername());
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         currentSession().save(user);
         currentSession().getTransaction().commit();
         return user;
